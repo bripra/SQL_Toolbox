@@ -1,5 +1,177 @@
 
 /*
+I heard someone say that coding is like a muscle, if you don't work it out and use it you loose it.
+I'm getting back to the gym
+*/
+
+/* 
+#work #coding #data #dataanalysis #sql #sqlqueries #tsql
+*/
+
+
+/***************************** October 11, 2022 *********************************************
+
+Hi I'm your new data analyst.
+
+The buyers would like a list of suppliers and the products they sell to us. Include the product names and the company name of the suppliers.
+
+Thank you;
+
+*/
+
+Select PRODUCTS.ProductID AS 'Product ID', PRODUCTS.ProductName AS 'Product Name', SUPPLIERS.CompanyName AS 'Company Name'
+From PRODUCTS
+INNER JOIN Suppliers ON PRODUCTS.SupplierID=Suppliers.SupplierID
+
+/************** October 5, 2022 **************
+Hi I'm your new data analyst.
+
+
+SELECT OrderID, ProductID, UnitPrice*Quantity AS 'Total Price'
+FROM ORDERDETAILS
+
+SELECT ORDERDETAILS.OrderID, ORDERDETAILS.ProductID, Products.ProductName, ORDERDETAILS.UnitPrice*ORDERDETAILS.Quantity AS 'Total Price'
+FROM ORDERDETAILS
+Inner Join Products ON ORDERDETAILS.ProductID=PRODUCTS.ProductID
+
+*/
+
+/*
+How many customers are in the database?
+SELECT COUNT(CustomerID) as 'Total Number of Customers'
+FROM Customers
+*/
+
+/*
+First order in the database
+SELECT Convert(varchar,MIN(OrderDate), 101) AS 'Frist Order'
+FROM ORDERS
+*/
+
+/*
+SELECT CONTACTTITLE AS 'CONTACT TITLE', COUNT(CONTACTTITLE) AS 'TOTAL NUMBER OF CONTACT TITLES'
+FROM CUSTOMERS
+GROUP BY ContactTitle
+ORDER BY ContactTitle
+*/
+
+/************************OCT 4 2022 *********************************************/
+
+/*
+Hi I'm your Data Analyst
+Can you provide me a list of orders for employee ID 5?
+
+SELECT ORDERID AS 'Order ID', ORDERDATE AS 'Order Date'
+FROM ORDERS
+WHERE EMPLOYEEID=5
+;
+*/
+
+/*
+Hi I'm your Data Analyst
+I need a suppliers contact list for everyone who isn't a Marketing Manager. Please include supplier ID too.
+Thank you,
+
+Let's see what the first 10 rows of data look like.
+
+SELECT TOP 10 *
+FROM Suppliers
+*/
+
+/* While the request didn't ask for the Company Name I'll inlcude it just in case. 
+SELECT SUPPLIERID AS 'Supplier ID', COMPANYNAME AS 'Company Name', CONTACTNAME AS 'Contact Name', CONTACTTITLE AS 'Title'
+FROM Suppliers
+WHERE NOT CONTACTTITLE='Marketing Manager'
+;
+*/
+
+/*
+Hi Data Analyst
+We need a list of all the Queso products.
+Thank you,
+
+Let's see what the first 20 rows of data look like.
+
+SELECT TOP 20 *
+FROM PRODUCTS
+*/
+
+/*
+The LIKE command and the % on either side so that no matter where the string Queso appears it will be found.
+
+SELECT PRODUCTID AS 'Product ID', PRODUCTNAME AS 'Product Name'
+FROM PRODUCTS
+WHERE PRODUCTNAME LIKE '%QUESO%'
+*/
+
+
+/* 
+Hi I'm your new data analyst. 
+Yes, I can get you a list of Order and Customer IDs that had orders shipped to either Belgium or France. 
+Thank you 
+
+Not being familiar with the data in the ORDERS table I want to display all the countries listed in the ShipCountry column
+
+SELECT DISTINCT SHIPCOUNTRY
+FROM ORDERS
+ORDER BY SHIPCOUNTRY
+;
+*/
+/* 
+
+Let's use the OR to find orders shipped to either France or Belgium. Also we will Order By to keep the orders together by ShipCountry.
+
+SELECT ORDERID AS 'Order ID', CUSTOMERID AS 'CUstomer ID', SHIPCOUNTRY AS 'Ship Country'
+FROM Orders
+WHERE SHIPCOUNTRY='Belgium' or SHIPCOUNTRY='FRANCE'
+ORDER BY ShipCountry
+;
+*/
+
+/* 
+Hi I'm your new data analyst. 
+Yes, I can get you a list of Order and Customer IDs that had orders shipped to Latin American countries. 
+Thank you 
+
+Never delete your code. Save it to a flash drive "toolbox"
+Delete everything from 'Belgium' over. 
+*/
+
+/*
+We are using IN. This allows you to choose multiple values wihtout using multiple OR. 
+
+SELECT ORDERID AS 'Order ID', CUSTOMERID AS 'CUstomer ID', SHIPCOUNTRY AS 'Ship Country'
+FROM Orders
+WHERE SHIPCOUNTRY IN ('Brazil', 'Mexico', 'Argentina', 'Venezuela')
+ORDER BY ShipCountry
+;
+*/
+
+/*
+Hi I'm your new data analyst. 
+HR would like a list of employees with their titles and date of births so they can plan birthday parties. 
+
+Thank you,
+
+Here we use the LEFT in the BirthDate column so we only include the date not the time. 
+
+SELECT FirstName AS 'First Name', LastName AS 'Last Name', Title, LEFT(BirthDate, 11) AS 'Birth Date'
+FROM EMPLOYEES
+Order By BirthDate
+*/
+
+/*
+
+Well you learn something new or you stall out. A wiser more knowledgable SQL guru pointed out instead of LEFT we should use
+CONVERT to convert the datetime column to a date column.
+
+SELECT FirstName AS 'First Name', LastName AS 'Last Name', Title, CONVERT(varchar, BirthDate, 101) AS 'Birth Date'
+FROM EMPLOYEES
+Order By BirthDate
+
+*/
+
+/*
 
 Show all information in the SHIPPERS table.
 
@@ -166,146 +338,6 @@ I'm getting back to the gym
 #work #coding #data #dataanalysis #sql #sqlqueries #tsql
 */
 
-/************************OCT 4 2022 *********************************************/
-
-/*
-Hi I'm your Data Analyst
-Can you provide me a list of orders for employee ID 5?
-
-SELECT ORDERID AS 'Order ID', ORDERDATE AS 'Order Date'
-FROM ORDERS
-WHERE EMPLOYEEID=5
-;
-*/
-
-/*
-Hi I'm your Data Analyst
-I need a suppliers contact list for everyone who isn't a Marketing Manager. Please include supplier ID too.
-Thank you,
-
-Let's see what the first 10 rows of data look like.
-
-SELECT TOP 10 *
-FROM Suppliers
-*/
-
-/* While the request didn't ask for the Company Name I'll inlcude it just in case. 
-SELECT SUPPLIERID AS 'Supplier ID', COMPANYNAME AS 'Company Name', CONTACTNAME AS 'Contact Name', CONTACTTITLE AS 'Title'
-FROM Suppliers
-WHERE NOT CONTACTTITLE='Marketing Manager'
-;
-*/
-
-/*
-Hi Data Analyst
-We need a list of all the Queso products.
-Thank you,
-
-Let's see what the first 20 rows of data look like.
-
-SELECT TOP 20 *
-FROM PRODUCTS
-*/
-
-/*
-The LIKE command and the % on either side so that no matter where the string Queso appears it will be found.
-
-SELECT PRODUCTID AS 'Product ID', PRODUCTNAME AS 'Product Name'
-FROM PRODUCTS
-WHERE PRODUCTNAME LIKE '%QUESO%'
-*/
-
-
-/* 
-Hi I'm your new data analyst. 
-Yes, I can get you a list of Order and Customer IDs that had orders shipped to either Belgium or France. 
-Thank you 
-
-Not being familiar with the data in the ORDERS table I want to display all the countries listed in the ShipCountry column
-
-SELECT DISTINCT SHIPCOUNTRY
-FROM ORDERS
-ORDER BY SHIPCOUNTRY
-;
-*/
-/* 
-
-Let's use the OR to find orders shipped to either France or Belgium. Also we will Order By to keep the orders together by ShipCountry.
-
-SELECT ORDERID AS 'Order ID', CUSTOMERID AS 'CUstomer ID', SHIPCOUNTRY AS 'Ship Country'
-FROM Orders
-WHERE SHIPCOUNTRY='Belgium' or SHIPCOUNTRY='FRANCE'
-ORDER BY ShipCountry
-;
-*/
-
-/* 
-Hi I'm your new data analyst. 
-Yes, I can get you a list of Order and Customer IDs that had orders shipped to Latin American countries. 
-Thank you 
-
-Never delete your code. Save it to a flash drive "toolbox"
-Delete everything from 'Belgium' over. 
-*/
-
-/*
-We are using IN. This allows you to choose multiple values wihtout using multiple OR. 
-
-SELECT ORDERID AS 'Order ID', CUSTOMERID AS 'CUstomer ID', SHIPCOUNTRY AS 'Ship Country'
-FROM Orders
-WHERE SHIPCOUNTRY IN ('Brazil', 'Mexico', 'Argentina', 'Venezuela')
-ORDER BY ShipCountry
-;
-*/
-
-/*
-Hi I'm your new data analyst. 
-HR would like a list of employees with their titles and date of births so they can plan birthday parties. 
-
-Thank you,
-
-Here we use the LEFT in the BirthDate column so we only include the date not the time. 
-
-SELECT FirstName AS 'First Name', LastName AS 'Last Name', Title, LEFT(BirthDate, 11) AS 'Birth Date'
-FROM EMPLOYEES
-Order By BirthDate
-*/
-
-/*
-
-Well you learn something new or you stall out. A wiser more knowledgable SQL guru pointed out instead of LEFT we should use
-CONVERT to convert the datetime column to a date column.
-
-SELECT FirstName AS 'First Name', LastName AS 'Last Name', Title, CONVERT(varchar, BirthDate, 101) AS 'Birth Date'
-FROM EMPLOYEES
-Order By BirthDate
-
-*/
-
-/************** October 5, 2022 **************
-Hi I'm your new data analyst.
-
-
-SELECT OrderID, ProductID, UnitPrice*Quantity AS 'Total Price'
-FROM ORDERDETAILS
-
-SELECT ORDERDETAILS.OrderID, ORDERDETAILS.ProductID, Products.ProductName, ORDERDETAILS.UnitPrice*ORDERDETAILS.Quantity AS 'Total Price'
-FROM ORDERDETAILS
-Inner Join Products ON ORDERDETAILS.ProductID=PRODUCTS.ProductID
-
-*/
-
-/*
-How many customers are in the database?
-SELECT COUNT(CustomerID) as 'Total Number of Customers'
-FROM Customers
-*/
-
-/*
-First order in the database
-SELECT Convert(varchar,MIN(OrderDate), 101) AS 'Frist Order'
-FROM ORDERS
-*/
 
 
 
