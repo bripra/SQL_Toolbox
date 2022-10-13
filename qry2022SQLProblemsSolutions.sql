@@ -8,6 +8,44 @@ I'm getting back to the gym
 #work #coding #data #dataanalysis #sql #sqlqueries #tsql
 */
 
+/****************************October 12, 2022 Part II ***********************************
+
+Hi I'm your new data analyst.
+
+The buyers would like a list of the total number of products per category and would like to start
+with the highest to the lowest. 
+
+Thank you,
+
+
+*/
+
+Select Categories.CategoryName AS 'Category Name', COUNT(Categories.CategoryName) AS 'Total Products'
+From Categories
+Inner Join Products ON Categories.CategoryID=Products.CategoryID
+Group By Categories.CategoryName
+Order by COUNT(Categories.CategoryName) DESC
+
+
+
+
+/****************************** October 12, 2022 Part I **********************************
+
+Hi I'm your new data analyst.
+
+The Shipping department would like a list of orders and which company was used to ship them. 
+Please include the date the order was placed, the name of the shipping company and the orders id.
+Oh and we are only interested in orders with an id number less than id 10270. 
+
+Thank you;
+
+*/
+
+Select Orders.OrderID, Convert(varchar,Orders.OrderDate,101) AS 'Order Date', Shippers.CompanyName
+From Orders
+Inner Join Shippers ON Orders.ShipVia=Shippers.ShipperID
+Where Orders.OrderID <=10270
+Order by Orders.OrderID
 
 /***************************** October 11, 2022 *********************************************
 
